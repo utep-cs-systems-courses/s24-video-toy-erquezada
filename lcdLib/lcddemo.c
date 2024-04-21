@@ -40,7 +40,7 @@ int main()
   drawLine();
   drawLine2();
   fillTriangle();
-
+  
   fillRectangle(30,30, 60, 60, COLOR_ORANGE);
   
 }
