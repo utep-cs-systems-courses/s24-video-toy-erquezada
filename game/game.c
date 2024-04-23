@@ -1,70 +1,59 @@
 #include <msp430.h>
 #include <libTimer.h>
-#include <lcdutils.h>
-#include <lcddraw.h>
-#include "buzzer.h"
+#include "lcdutils.h"
+#include "lcddraw.h"
 
-// Define pins for LEDs and Switches
-#define LED BIT6
-#define SW1 BIT0
-#define SW2 BIT1
-#define SW3 BIT2
-#define SW4 BIT3
+#define LED BIT6		/* note that bit zero req'd for display */
 
-#define GAME_SWITCHES (SW1 | SW2 | SW3 | SW4)
-#define GAME_START_SWITCH SW1
+#define SW1 1
+#define SW2 2
+#define SW3 4
+#define SW4 8
 
-const int DISPLAY_BACKGROUND_COLOR = COLOR_BLACK;
-const int DISPLAY_OBJECT_COLOR = COLOR_WHITE;
-const int SOUND_BOUNCE_FREQUENCY = 440;
-const int SOUND_DURATION = 10;
+#define SWITCHES 15
 
-int Ball_Position[] = {30, 10};
-int Ball_Direction[] = {1, 1};
-int DISPLAY_DIMENSIONS[] = {128, 160};
+int backGroundColor = BLACK;
+int objectColor = WHITE;
+int ballPositionInitial[] = {30, 10};
+int ballDirectionInital[] = {1, 1};
+int displayDimensions[] = {128, 160};
 
-char player_score = 0;
+char playerScore = 0;
 
-int paddle_dims[] = {30, 5};
-int ball_dims[] = {3, 3}; 
+int rectangleDimension[] = {30, 5};
+int ballDimension[] = {3, 3}; 
 
-int player_paddle_pos[] = {64, 145};  // Center the paddle initially
-int ball_pos[] = {
-  Ball_Position[0], Ball_Position[1], Ball_Position[0] + ball_dims[0], Ball_Position[1] + ball_dims[1]
+int playerPosition[] = {0, 145, 0, 145};
+int ballPosition[] = {
+  ballPositionInitial[0], ballPositionInitial[1], ballPositionInitial[0], ballPositionInitial[1]
 };
 
-// Initialize system
-void initialize() {
-  configureClocks();
-  lcd_init();
-  enableWDTInterrupts();
-  buzzer_init();
-  or_sr(0x18);  // CPU off, GIE on
+int playerDirection[] = {2, 0};
+int ballDirection[] = {1, 1};
+
+static char 
+switch_update_interrupt_sense()
+{
+  char p2val = P2IN;
+  /* update switch interrupt to detect changes from current buttons */
+  P2IES |= (p2val & SWITCHES);	/* if switch up, sense down */
+  P2IES &= (p2val | ~SWITCHES);	/* if switch down, sense up */
+  return p2val;
 }
 
-// Main game loop
-void main() {
-  initialize();
-  clearScreen(DISPLAY_BACKGROUND_COLOR);
+void switch_init() /* setup switch */
+{
+  P2REN |= SWITCHES;  /* enables resistors for switches */
+  P2IE |= SWITCHES;   /* enable interrupts from switches */
+  P2OUT |= SWITCHES;  /* pull-ups for switches */
+  P2DIR &= ~SWITCHES; /* set switches' bits for input */
+  switch_update_interrupt_sense();
+}
 
-  while (1) {
-    if (P1IN & GAME_START_SWITCH) {  // Check if the start switch is pressed
-      // Game logic here
+void drawRect(int pos[], int dims[], int color) {
+  for (int i = pos[0]; i < pos[0] + dims[0]; i++) {
+    for (int j = pos[1]; j < pos[1] + dims[1]; j++) {
+      drawPixel(i, j, color);
     }
-
-    // Draw paddle and ball
-    fillRectangle(player_paddle_pos[0], player_paddle_pos[1], paddle_dims[0], paddle_dims[1], DISPLAY_OBJECT_COLOR);
-    fillRectangle(ball_pos[0], ball_pos[1], ball_dims[0], ball_dims[1], DISPLAY_OBJECT_COLOR);
-  }
-}
-
-// Watchdog timer interrupt service routine
-__interrupt void WDT() {
-  static int count = 0;
-  if (++count == 15) {
-    // Update ball position based on direction
-    // Check for collisions and update ball direction
-    // Possibly update score and handle game over
-    count = 0;
   }
 }
