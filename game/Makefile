@@ -8,13 +8,13 @@ LDFLAGS		= -L../lib -L/opt/ti/msp430_gcc/include/
 CC              = msp430-elf-gcc
 AS              = msp430-elf-gcc -mmcu=${CPU} -c
 
-all:game.elf
+all:pong.elf
 
 #additional rules for files
-game.elf: ${COMMON_OBJECTS} wdt_handler.o buzzer.o
-	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
+pong.elf: ${COMMON_OBJECTS} wdt_handler.o buzzer.o
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd
 
-load: game.elf
+load: pong.elf
 	msp430loader.sh $^
 
 clean:
