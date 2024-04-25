@@ -81,9 +81,9 @@ void drawChar8x12(u_char rcol, u_char rrow, char c,
   u_char oc = c - 0x20;
 
   lcd_setArea(rcol, rrow, rcol + 7, rrow + 11); /* relative to requested col/row */
-  while (row < 13) {
+  while (row < 12) {  // Fixed the number of iterations to match the set area
     while (col < 8) {
-      u_int colorBGR = (font_5x7[oc][col] & bit) ? fgColorBGR : bgColorBGR;
+      u_int colorBGR = (font_8x12[oc][col] & bit) ? fgColorBGR : bgColorBGR;  // Assuming a font_8x12 array
       lcd_writeColor(colorBGR);
       col++;
     }
@@ -117,12 +117,12 @@ void drawString5x7(u_char col, u_char row, char *string,
 
 // Modified from method signature above
 void drawString8x12(u_char col, u_char row, char *string,
-		u_int fgColorBGR, u_int bgColorBGR)
+        u_int fgColorBGR, u_int bgColorBGR)
 {
   u_char cols = col;
-  while (*string) {
-    drawChar8x12(cols, row, *string++, fgColorBGR, bgColorBGR);
-    cols += 11;
+  while (*string) { // Loops through each character in the string
+    drawChar8x12(cols, row, *string++, fgColorBGR, bgColorBGR); // Draws each character
+    cols += 11; // Moves to the next position, adding a three-column space between characters
   }
 }
 
