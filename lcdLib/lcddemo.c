@@ -34,7 +34,7 @@ int main()
 
   clearScreen(BLACK);
 
-  drawString5x7(20,20, "hello, world", COLOR_GREEN, COLOR_RED);
+  //drawString5x7(20,20, "hello, world", COLOR_GREEN, COLOR_RED);
   drawString8X12(20,20, "Testing function", COLOR_GREEN, COLOR_RED);
 
   drawLine();
