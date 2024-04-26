@@ -25,21 +25,15 @@ void fillTriangle() {
   }
 }
 
-void DrawHourglass(short size) {
-    short cc = screenWidth / 2;  // Calculate center column of the screen
-    short cr = screenHeight / 2; // Calculate center row of the screen
-
-    for (short col = 0; col < size; col++) {
-        for (short row = col; row < size; row++) {
-            drawPixel(cc + col, cr + row, COLOR_WHITE);  // Draw dot in the lower right quadrant
-            drawPixel(cc + col, cr - row, COLOR_WHITE);  // Draw dot in the upper right quadrant
-            drawPixel(cc - col, cr + row, COLOR_WHITE);  // Draw dot in the lower left quadrant
-            drawPixel(cc - col, cr - row, COLOR_WHITE);  // Draw dot in the upper left quadrant
-        }
+void drawBox(u_char acol, u_char arow, u_char size, u_int color) {
+  u_char max_col = acol + size;
+  u_char max_row = arow + size;
+  for (u_char col = acol - size; col < max_col; col++) {
+    for (u_char row = arow - size; row < max_row; row++) {
+      drawPixel(col, row, color); 
     }
+  }
 }
-
-
 
 /** Initializes everything, clears the screen, draws "hello" and a square */
 int main()
@@ -47,6 +41,18 @@ int main()
   configureClocks();
   lcd_init();
   u_char width = screenWidth, height = screenHeight;
+  
+  short centerCol  =  screenWidth >> 1;
+  short centerRow = screenHeight >> 1;
+  int size = 30;
+  for (short col = 0; col < size; col++) {
+    for (short row = col; row < size; row++) {
+        drawPixel(centerCol + col, centerRow + row, COLOR_WHITE);  // Draw dot in the lower right quadrant
+        drawPixel(centerCol + col, centerRow - row, COLOR_WHITE);  // Draw dot in the upper right quadrant
+        drawPixel(centerCol - col, centerRow + row, COLOR_WHITE);  // Draw dot in the lower left quadrant
+        drawPixel(centerCol - col, centerRow - row, COLOR_WHITE);  // Draw dot in the upper left quadrant
+      }
+  }
 
   clearScreen(BLACK);
 
@@ -59,14 +65,7 @@ int main()
   // drawLine();
   // drawLine2();
   // fillTriangle();
-
-  // Draw the hourglass with the center of the screen as the center of the hourglass
-  short hourglassSize = height / 2;
-  short cc = width / 2; // Center column for the hourglass
-  short cr = height / 2; // Center row for the hourglass
-  unsigned int color = COLOR_WHITE; // Color of the hourglass
-  DrawHourglass(screenHeight / 4);  // Pass half of the screen height as size
-
+  drawBox(centerCol, centerRow, size, COLOR_VIOLET);
 
   fillRectangle(30, 30, 60, 60, COLOR_ORANGE);
 }
