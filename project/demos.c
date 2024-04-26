@@ -6,18 +6,18 @@
 #include "lcdutils.h"
 #include "lcddraw.h"
 
-drawLine()
+void drawLine()
 {
   for (int i = 0; i < 128; i++)
     drawPixel(i,i, COLOR_BLUE);
 }
 
-drawLine2() {
+void drawLine2() {
   for (int i = 0; i < 30; i++)
     drawPixel(i, 30-i, COLOR_PINK);
 }
 
-fillTriangle() {
+void fillTriangle() {
   for (int i = 0; i < 64; i++) {
     for (int j = 0; j < i; j++) {
       drawPixel(j, i, COLOR_BEIGE);
@@ -25,22 +25,20 @@ fillTriangle() {
   }
 }
 
-void DrawHourglass(short size, short cc, short cr, unsigned int color) {
-    // Draw upper triangle
-    for (short row = 0; row < size / 2; row++) {
-        for (short col = 0; col <= row; col++) {
-            drawPixel(cc + col, cr - row, color); // Right side of the upper triangle
-            drawPixel(cc - col, cr - row, color); // Left side of the upper triangle
-        }
-    }
-    // Draw lower triangle
-    for (short row = 0; row <= size / 2; row++) {
-        for (short col = 0; col < size / 2 - row; col++) {
-            drawPixel(cc + col, cr + row, color); // Right side of the lower triangle
-            drawPixel(cc - col, cr + row, color); // Left side of the lower triangle
+void DrawHourglass(short size) {
+    short cc = screenWidth / 2;  // Calculate center column of the screen
+    short cr = screenHeight / 2; // Calculate center row of the screen
+
+    for (short col = 0; col < size; col++) {
+        for (short row = col; row < size; row++) {
+            drawPixel(cc + col, cr + row, COLOR_WHITE);  // Draw dot in the lower right quadrant
+            drawPixel(cc + col, cr - row, COLOR_WHITE);  // Draw dot in the upper right quadrant
+            drawPixel(cc - col, cr + row, COLOR_WHITE);  // Draw dot in the lower left quadrant
+            drawPixel(cc - col, cr - row, COLOR_WHITE);  // Draw dot in the upper left quadrant
         }
     }
 }
+
 
 
 /** Initializes everything, clears the screen, draws "hello" and a square */
@@ -67,7 +65,8 @@ int main()
   short cc = width / 2; // Center column for the hourglass
   short cr = height / 2; // Center row for the hourglass
   unsigned int color = COLOR_WHITE; // Color of the hourglass
-  DrawHourglass(hourglassSize, cc, cr, color);
+  DrawHourglass(screenHeight / 4);  // Pass half of the screen height as size
+
 
   fillRectangle(30, 30, 60, 60, COLOR_ORANGE);
 }
