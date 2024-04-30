@@ -4,16 +4,6 @@
 
 char state, switch_state_down, switch_state_changed;
 
-// Function to determine the highest-priority button pressed
-int getButtonPressed() {
-    char p2val = P2IN; // Read input from port 2
-    if (p2val & TOPS1 ? 0 : 1) return 1;
-    if (p2val & TOPS2 ? 0 : 1) return 2;
-    if (p2val & TOPS3 ? 0 : 1) return 3;
-    if (p2val & TOPS4 ? 0 : 1) return 4;
-    return 0; // No button pressed
-}
-
 static char switch_update_interrupt_sense() {
     char p2val = P2IN;
     // Update switch interrupt to detect changes from current buttons

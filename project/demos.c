@@ -38,7 +38,7 @@ void drawBox(u_char acol, u_char arow, u_char size, u_int color) {
 }
 
 /** Initializes everything, clears the screen, draws "hello" and a square */
-int main()
+int mainTwo()
 {
   configureClocks();
   lcd_init();
@@ -64,9 +64,9 @@ int main()
   drawString8X12(20, 20, "Testing function", COLOR_GREEN, COLOR_RED);
 
   // Comment out or remove other drawing functions if not used or not defined
-  // drawLine();
-  // drawLine2();
-  // fillTriangle();
+  drawLine();
+  drawLine2();
+  fillTriangle();
   drawBox(centerCol, centerRow, size, COLOR_VIOLET);
 
   fillRectangle(30, 30, 60, 60, COLOR_ORANGE);
