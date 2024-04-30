@@ -1,20 +1,17 @@
-# ---------------------
-# makfile configuration
+COMMON_OBJECTS		= myDraws.o p2_interrupt_handler.o stateMachine.o switches.o buzzer.o sounds.o
+
 CPU             	= msp430g2553
 CFLAGS          	= -mmcu=${CPU} -Os -I../h
-LDFLAGS		= -L../lib -L/opt/ti/msp430_gcc/include/ 
-
-#switch the compiler (for the internal make rules)
+LDFLAGS = -L../lib -L/opt/ti/msp430_gcc/include/ 
 CC              = msp430-elf-gcc
 AS              = msp430-elf-gcc -mmcu=${CPU} -c
 
-all:pong.elf
+all: main.elf #what are .elf files?
 
-#additional rules for files
-pong.elf: ${COMMON_OBJECTS} pong.o wdt_handler.o buzzer.o ../lib/libTimer.a
+main.elf: ${COMMON_OBJECTS} main.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
 
-load: pong.elf
+load: main.elf
 	msp430loader.sh $^
 
 clean:
