@@ -61,7 +61,7 @@ int mainTwo()
   // Comment out or remove old drawString function if not used
   // drawString5x7(20, 20, "hello, world", COLOR_GREEN, COLOR_RED);
 
-  drawString8X12(20, 20, "Testing function", COLOR_GREEN, COLOR_RED);
+  // drawString8X12(20, 20, "Testing function", COLOR_GREEN, COLOR_RED);
 
   // Comment out or remove other drawing functions if not used or not defined
   drawLine();
