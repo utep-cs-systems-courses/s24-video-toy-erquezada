@@ -9,7 +9,7 @@ void state_advance(int state){
         drawBox();
       break;
     case 2:
-        fillTriangke();
+        fillTriangle();
        break;  
     case 3:
         demos();
