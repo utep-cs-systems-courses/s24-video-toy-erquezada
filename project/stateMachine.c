@@ -6,11 +6,13 @@
 void state_advance(int state){ 
  switch (state) {
     case 1:
-        demos();
+        drawBox();
       break;
     case 2:
+        fillTriangke();
        break;  
     case 3:
+        demos();
     default:   
       break;
   }
