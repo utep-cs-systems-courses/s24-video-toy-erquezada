@@ -12,12 +12,14 @@ void drawLine()
     drawPixel(i,i, COLOR_BLUE);
 }
 
-void drawLine2() {
+void drawLine2()
+{
   for (int i = 0; i < 30; i++)
     drawPixel(i, 30-i, COLOR_PINK);
 }
 
-void fillTriangle() {
+void fillTriangle()
+{
   for (int i = 0; i < 64; i++) {
     for (int j = 0; j < i; j++) {
       drawPixel(j, i, COLOR_BEIGE);
