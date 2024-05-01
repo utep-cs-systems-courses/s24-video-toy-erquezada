@@ -3,6 +3,7 @@
 #include "buzzer.h"
 #include "led.h"
 #include "demos.h"
+#include "switches.h"
 
 void playNotes(int notes[], int numNotes) {
     for (int i = 0; i < numNotes; i++) {
@@ -26,7 +27,8 @@ void playNotes(int notes[], int numNotes) {
 }
 
 void melody(int counter) {
-    int notes[] = {587, 0, 392, 440, 494, 523, 587, 0, 392, 0, 392, 659, 523, 587, 659, 740, 784, 0, 392, 0, 392}; // Bach Melody
+    // Bach Melody
+    int notes[] = {392, 0, 392, 0, 784, 740, 659, 587, 523, 659, 392, 0, 392, 0, 587, 523, 494, 440, 392, 0, 587};
     int numNotes = sizeof(notes) / sizeof(notes[0]);
     playNotes(notes, numNotes);
     if (counter == 2) return;
@@ -36,8 +38,8 @@ void melody(int counter) {
 
 void bachPartita(int counter) {
     drawTree();
-
-    int notes[] = {int Notes[] = {440, 0, 440, 659, 0, 659, 698, 587, 523, 466, 440, 0, 392, 349,330, 349, 392, 349, 349,294); // theme from bach chaconne in d minor
+    // Theme from Bach Chaconne in D Minor
+    int notes[] = {294, 349, 349, 392, 349, 330, 349, 392, 0, 440, 466, 523, 587, 698, 659, 0, 659, 440, 0, 440};
     int numNotes = sizeof(notes) / sizeof(notes[0]); // Array size
 
     playNotes(notes, numNotes);

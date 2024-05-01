@@ -12,7 +12,7 @@
 void fillTriangle() {
   for (int i = 0; i < 64; i++) {
     for (int j = 0; j < i; j++) {
-      drawPixel(j, i, COLOR_BEIGE);
+      drawPixel(j, i, COLOR_BLUE);
     }
   }
 }
@@ -41,7 +41,7 @@ void drawTree() {
 }
 
 
-void mainScreen() {
+void fillScreen() {
     __delay_cycles(10000);
 
     while (1) {

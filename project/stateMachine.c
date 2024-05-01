@@ -8,17 +8,18 @@ void state_advance(int state){
     case 1:
       fillTriangle();
       melody(2);
-      clearScreen(COLOR_WHITE);
+      clearScreen(COLOR_BLACK);
       break;
     case 2:
        drawTree();
+       drawStonehenge();
        break;
     case 3:
       bachPartita(1);
+      drawBox();
       break;
     case 4:
-      // clearScreen(COLOR_WHITE);
-       mainScreen();
+       fillScreen();
        break;
       
     default:
