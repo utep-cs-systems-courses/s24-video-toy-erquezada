@@ -22,7 +22,7 @@ void drawBox(u_char acol, u_char arow, u_char size, u_int color) {
   u_char max_row = arow + size;
   for (u_char col = acol - size; col < max_col; col++) {
     for (u_char row = arow - size; row < max_row; row++) {
-      drawPixel(col, row, color); 
+      drawPixel(col, row, COLOR_YELLOW);
     }
   }
 }
@@ -45,11 +45,11 @@ void mainScreen() {
     __delay_cycles(10000);
 
     while (1) {
-        int x = rand() % SCREEN_WIDTH;
-        int y = rand() % SCREEN_HEIGHT;
+        int x = rand() % 10000;
+        int y = rand() % 10000;
         int width = rand() % 20 + 5; // Random width between 5 and 25 pixels
         int height = rand() % 20 + 5; // Random height between 5 and 25 pixels
-        int color = rand() % COLOR_MAX; // Random color
+        int color = rand() % COLOR_BLUE;
         
         // Draw random filled rectangle
         fillRectangle(x, y, width, height, color);

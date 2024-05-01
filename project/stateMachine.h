@@ -2,6 +2,6 @@
 #define stateMachine_included
 
 void state_advance();
-void elGobiernoGobierna(int counter);
+void bachPartita(int counter);
 
 #endif // included

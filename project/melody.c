@@ -2,7 +2,7 @@
 #include "libTimer.h"
 #include "buzzer.h"
 #include "led.h"
-#include "demos.h" // Assuming you have a drawCow function here
+#include "demos.h"
 
 void playNotes(int notes[], int numNotes) {
     for (int i = 0; i < numNotes; i++) {
@@ -26,7 +26,7 @@ void playNotes(int notes[], int numNotes) {
 }
 
 void melody(int counter) {
-    int notes[] = {698, 587, 698, 587, 587, 0, 659, 0, 659, 0, 659, 0, 659, 659, 698, 587, 698, 587, 587};
+  int notes[] = {}; // short melody
     int numNotes = sizeof(notes) / sizeof(notes[0]);
     playNotes(notes, numNotes);
     if (counter == 3) return;
@@ -34,27 +34,14 @@ void melody(int counter) {
     melody(counter + 1);
 }
 
-void elGobiernoGobierna(int counter) {
-    drawCow();
+void bachPartita(int counter) {
+    drawTree();
 
-    int notes[] = {
-        659, 659, 880, 880, 988, 988, 880, 0,
-        784, 784, 659, 659, 880, 880, 784, 0,
-        659, 659, 659, 0,
-        659, 659, 880, 880, 988, 988, 880, 0,
-        784, 784, 659, 659, 880, 880, 784, 0,
-        659, 784, 880, 988, 988, 880, 784, 659, 659, 0,
-        659, 659, 880, 880, 988, 988, 880, 0,
-        784, 784, 659, 659, 880, 880, 784, 0,
-        659, 784, 880, 988, 988, 880, 784, 659, 659, 0,
-        880, 988, 988, 1047, 988, 880, 784, 880, 659, 659, 659, 0,
-        880, 988, 988, 1047, 988, 880, 784, 880, 659, 659, 659, 0,
-        659, 0,
-    };
+    int notes[] = {}; // theme from bach partita
     int numNotes = sizeof(notes) / sizeof(notes[0]); // Array size
 
     playNotes(notes, numNotes);
     if (counter == 2) return;
-    drawCow();
-    elGobiernoGobierna(counter + 1);
+    drawTree();
+    bachPartita(counter + 1);
 }
