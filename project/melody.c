@@ -26,10 +26,10 @@ void playNotes(int notes[], int numNotes) {
 }
 
 void melody(int counter) {
-  int notes[] = {}; // short melody
+    int notes[] = {587, 0, 392, 440, 494, 523, 587, 0, 392, 0, 392, 659, 523, 587, 659, 740, 784, 0, 392, 0, 392}; // Bach Melody
     int numNotes = sizeof(notes) / sizeof(notes[0]);
     playNotes(notes, numNotes);
-    if (counter == 3) return;
+    if (counter == 2) return;
     switch_init();
     melody(counter + 1);
 }
@@ -37,7 +37,7 @@ void melody(int counter) {
 void bachPartita(int counter) {
     drawTree();
 
-    int notes[] = {}; // theme from bach partita
+    int notes[] = {int Notes[] = {440, 0, 440, 659, 0, 659, 698, 587, 523, 466, 440, 0, 392, 349,330, 349, 392, 349, 349,294); // theme from bach chaconne in d minor
     int numNotes = sizeof(notes) / sizeof(notes[0]); // Array size
 
     playNotes(notes, numNotes);
