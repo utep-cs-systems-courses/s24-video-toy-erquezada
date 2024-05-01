@@ -1,7 +1,7 @@
 #include <msp430.h>
 #include "stateMachine.h"
 #include "switches.h"
-#include "myDraws.h"
+#include "demos.h"
 
 void state_advance(int state){ 
  switch (state) {

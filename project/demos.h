@@ -1,5 +1,5 @@
-#ifndef _MY_DRAWS_H_
-#define _MY_DRAWS_H_
+#ifndef _DEMOS_H_
+#define _DEMOS_H_
 #include <lcdutils.h>
 
 void funnyFace();
