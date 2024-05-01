@@ -2,11 +2,11 @@
 #define _DEMOS_H_
 #include <lcdutils.h>
 
-void funnyFace();
-void dayHouse();
-void drawLine(int x0, int y0, int x1, int y1, int color);
+void fillTriangle();
+void drawTree();
+void drawBox(u_char acol, u_char arow, u_char size, u_int color);
 int globalCounter();
 void mainScreen();
-void drawCow();
+void drawStonehenge();
 
 #endif

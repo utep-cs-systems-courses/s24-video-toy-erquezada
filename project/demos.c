@@ -1,7 +1,7 @@
 #include <msp430.h>
 #include "lcdutils.h"
 #include "lcddraw.h"
-#include "myDraws.h"
+#include "demos.h"
 #include "led.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,81 +9,65 @@
 #include "buzzer.h"
 #include "stateMachine.h"
 
-void drawLine(int x0, int y0, int x1, int y1, int color) {
-    int dx = abs(x1 - x0), dy = abs(y1 - y0), sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1, err = dx - dy;
-    while (1) {
-        drawPixel(x0, y0, color);
-        if (x0 == x1 && y0 == y1) break;
-        int e2 = 2 * err;
-        if (e2 > -dy) { err -= dy; x0 += sx; }
-        if (e2 < dx) { err += dx; y0 += sy; }
+void fillTriangle() {
+  for (int i = 0; i < 64; i++) {
+    for (int j = 0; j < i; j++) {
+      drawPixel(j, i, COLOR_BEIGE);
     }
+  }
 }
 
-void funnyFace() {
-    // Draw glasses
-    fillRectangle(20, 30, 30, 30, COLOR_BLACK);
-    fillRectangle(80, 30, 30, 30, COLOR_BLACK);
-    // Draw glasses connector
-    for (int i = 0; i < 45; i++) {
-        drawPixel(90 + i, 30, COLOR_BLACK);
-        drawPixel(30 + i, 30, COLOR_BLACK);
-        drawPixel(50 + i, 40, COLOR_BLACK);
+void drawBox(u_char acol, u_char arow, u_char size, u_int color) {
+  u_char max_col = acol + size;
+  u_char max_row = arow + size;
+  for (u_char col = acol - size; col < max_col; col++) {
+    for (u_char row = arow - size; row < max_row; row++) {
+      drawPixel(col, row, color); 
     }
-    // Draw nose
-    for (int i = 0; i < 30; i++) {
-        drawPixel(40 + i, 90 - i, COLOR_ORANGE);
-        drawPixel(40 + i, 90, COLOR_ORANGE);
-    }
-    // Draw mouth
-    for (int i = 0; i < 70; i++)
-        drawPixel(30 + i, 120, COLOR_ORANGE);
-    for (int i = 0; i < 5; i++) {
-        drawPixel(30 - i, 120 - i, COLOR_ORANGE);
-        drawPixel(97 + i, 120 - i, COLOR_ORANGE);
-    }
+  }
 }
 
-void dayHouse() {
+void drawTree() {
     int change = globalCounter();
-    int astroSize = 30; // Size of the sun (square)
-    // Draw the background
-    fillRectangle(0, 0, 150, 180, change % 2 == 0 ? COLOR_BLUE : COLOR_SKY_BLUE);
-    // Draw astro
-    fillRectangle(10, 10, astroSize, astroSize, change % 2 == 0 ? COLOR_WHITE : COLOR_YELLOW);
-    // Draw the house
-    fillRectangle(40, 90, 75, 75, COLOR_CHOCOLATE); // Body of the house
-    fillRectangle(60, 130, 20, 30, COLOR_RED);      // Door
-    fillRectangle(55, 100, 50, 20, COLOR_GREEN);   // Window 1
-    // Draw the roof (Triangle-like)
-    int roofY = 90;
-    for (int i = 0; i < 38; i++) {
-        drawLine(40 + i, roofY, 77, 50 + i, COLOR_BROWN);
-        drawLine(115 - i, roofY, 77, 50 + i, COLOR_BROWN);
-    }
+    // Draw the trunk
+    fillRectangle(250, 100, 20, 80, COLOR_BROWN);
+    
+    // Draw the leaves
+    fillRectangle(230, 50, 40, 40, COLOR_GREEN);
+    fillRectangle(250, 40, 40, 40, COLOR_GREEN);
+    fillRectangle(270, 50, 40, 40, COLOR_GREEN);
+    fillRectangle(240, 80, 40, 40, COLOR_GREEN);
+    fillRectangle(260, 80, 40, 40, COLOR_GREEN);
 }
+
 
 void mainScreen() {
-    drawString5x7(10, 10, "TAKE A BREAK :D", COLOR_BLACK, COLOR_WHITE);
-    drawString5x7(10, 50, "UNTIL THE SCREEN ", COLOR_DARK_GREEN, COLOR_WHITE);
-    drawString5x7(10, 80, " IS TOTALLY RED :D", COLOR_DARK_GREEN, COLOR_WHITE);
     __delay_cycles(10000);
+
     while (1) {
-        fillRectangle(rand() % 100000000, rand() % 100000000, 1, 1, COLOR_RED);
+        int x = rand() % SCREEN_WIDTH;
+        int y = rand() % SCREEN_HEIGHT;
+        int width = rand() % 20 + 5; // Random width between 5 and 25 pixels
+        int height = rand() % 20 + 5; // Random height between 5 and 25 pixels
+        int color = rand() % COLOR_MAX; // Random color
+        
+        // Draw random filled rectangle
+        fillRectangle(x, y, width, height, color);
+        
+        __delay_cycles(500000); // Adjust delay as needed for desired animation speed
     }
 }
 
-void drawCow() {
-    clearScreen(COLOR_GREEN);
-    // Draw a simple representation of a cow using basic shapes
-    // Body
-    fillRectangle(30, 50, 90, 30, COLOR_BROWN);
-    // Head
-    fillRectangle(50, 30, 20, 20, COLOR_WHITE);
-    fillRectangle(50, 30, 5, 5, COLOR_BLACK); // Eyes
-    fillRectangle(65, 30, 5, 5, COLOR_BLACK);
-    fillRectangle(55, 35, 10, 5, COLOR_BLACK); // Mouth
-    // Legs
-    for (int i = 0; i < 4; i++)
-        fillRectangle(40 + i * 20, 80, 10, 20, COLOR_BLACK);
+
+void drawStonehenge() {
+    clearScreen(COLOR_LIGHT_BLUE);
+    // Draw a simplified representation of Stonehenge using basic shapes
+    // Vertical stones
+    fillRectangle(60, 30, 20, 150, COLOR_GRAY);
+    fillRectangle(100, 30, 20, 150, COLOR_GRAY);
+    fillRectangle(140, 30, 20, 150, COLOR_GRAY);
+    // Horizontal stones
+    fillRectangle(40, 120, 160, 20, COLOR_GRAY);
+    fillRectangle(40, 160, 160, 20, COLOR_GRAY);
 }
+
