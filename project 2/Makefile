@@ -1,4 +1,4 @@
-COMMON_OBJECTS		= demos.o p2_interrupt_handler.o stateMachine.o switches.o buzzer.o melody.o switches.c.o
+COMMON_OBJECTS		= game.o music.o
 
 CPU             	= msp430g2553
 CFLAGS          	= -mmcu=${CPU} -Os -I../h
@@ -6,12 +6,12 @@ LDFLAGS = -L../lib -L/opt/ti/msp430_gcc/include/
 CC              = msp430-elf-gcc
 AS              = msp430-elf-gcc -mmcu=${CPU} -c
 
-all: main.elf #what are .elf files?
+all: game.elf #what are .elf files?
 
-main.elf: ${COMMON_OBJECTS} main.o
+game.elf: ${COMMON_OBJECTS} game.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
 
-load: main.elf
+load: game.elf
 	msp430loader.sh $^
 
 clean:
