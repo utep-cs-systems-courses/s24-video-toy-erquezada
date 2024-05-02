@@ -1,4 +1,4 @@
-COMMON_OBJECTS		= game.o music.o common.o
+COMMON_OBJECTS		= game.o music.o common.o main.o
 
 CPU             	= msp430g2553
 CFLAGS          	= -mmcu=${CPU} -Os -I../h
