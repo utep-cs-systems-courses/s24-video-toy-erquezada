@@ -5,6 +5,7 @@
 #include <libTimer.h>
 #include "lcdutils.h"
 #include "lcddraw.h"
+#include "lcddemo.h"
 
 drawLine()
 {
@@ -25,22 +26,6 @@ fillTriangle() {
   }
 }
 
-void DrawHourglass(short size, short cc, short cr, unsigned int color) {
-    // Draw upper triangle
-    for (short row = 0; row < size / 2; row++) {
-        for (short col = 0; col <= row; col++) {
-            drawPixel(cc + col, cr - row, color); // Right side of the upper triangle
-            drawPixel(cc - col, cr - row, color); // Left side of the upper triangle
-        }
-    }
-    // Draw lower triangle
-    for (short row = 0; row <= size / 2; row++) {
-        for (short col = 0; col < size / 2 - row; col++) {
-            drawPixel(cc + col, cr + row, color); // Right side of the lower triangle
-            drawPixel(cc - col, cr + row, color); // Left side of the lower triangle
-        }
-    }
-}
 
 
 /** Initializes everything, clears the screen, draws "hello" and a square */
@@ -48,7 +33,8 @@ int main()
 {
   configureClocks();
   lcd_init();
-  u_char width = screenWidth, height = screenHeight;
+  u_char width = screenWidth; 
+  u_char height = screenHeight;
 
   clearScreen(BLACK);
 
@@ -62,12 +48,17 @@ int main()
   // drawLine2();
   // fillTriangle();
 
-  // Draw the hourglass with the center of the screen as the center of the hourglass
-  short hourglassSize = height / 2;
-  short cc = width / 2; // Center column for the hourglass
-  short cr = height / 2; // Center row for the hourglass
-  unsigned int color = COLOR_WHITE; // Color of the hourglass
-  DrawHourglass(hourglassSize, cc, cr, color);
 
-  fillRectangle(30, 30, 60, 60, COLOR_ORANGE);
+  short centerCol = width / 2; // Center column for the hourglass
+  short centerRow = height / 2; // Center row for the hourglass
+  for (int col = 0; col < 20; col++) {
+    for (int row = 0; row < 20; row++) {
+      drawPixel(centerCol + col, centerRow + row, COLOR_PINK);
+      drawPixel(centerCol + col, centerRow - row, COLOR_PINK);
+      drawPixel(centerCol - col, centerRow - row, COLOR_PINK);
+      drawPixel(centerCol - col, centerRow + row, COLOR_PINK);
+    }
+  }
+
+  fillRectangle(30, 15, 30, 30, COLOR_ORANGE);
 }
