@@ -61,7 +61,7 @@ void bachPartita(int counter) {
     
     bachPartita(counter + 1); // Recursive call with counter incremented
     
-    drawSquares(); // Draw the piano after playing the melody
+    drawSquares(); // Draw the squares after playing the melody
 }
 
 void anotherMelody(int counter) {
@@ -78,7 +78,25 @@ void anotherMelody(int counter) {
     
     anotherMelody(counter + 1); // Recursive call with counter incremented
     
-    animateTriangles(); // Draw circles after playing the melody
+    animateTriangles(); // Draw after playing the melody
 }
+
+void lastMelody(int counter) {
+    if (counter == 2) return; // Terminate recursion based on the desired condition
+    
+    fillScreen();
+    
+    // Melody
+    int notes[] = {440, 494, 523, 587, 659, 698, 784, 880, 988, 1046, 1174, 1318, 1396, 1568, 1760, 1976, 2093, 0, 2093, 1976, 1760, 1568, 1396, 1318};
+
+    int numNotes = sizeof(notes) / sizeof(notes[0]); // Array size
+
+    playNotes(notes, numNotes); // Play the melody
+    
+    lastMelody(counter + 1); // Recursive call with counter incremented
+    
+    fillScreen(); // Draw after playing the melody
+}
+
 
 

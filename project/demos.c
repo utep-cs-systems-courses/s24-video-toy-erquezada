@@ -99,7 +99,7 @@ void drawSquares() {
 void fillScreen() {
     __delay_cycles(10000);
     int counter = 0; // Counter to limit the number of iterations
-    while (counter < 100) { // Terminate after 100 iterations
+    while (counter < 200) { // Terminate after 100 iterations
         int x = rand() % 10000;
         int y = rand() % 10000;
         int width = rand() % 20 + 5; // Random width between 5 and 25 pixels

@@ -18,6 +18,7 @@ void state_advance(int state){
       drawSquares();
       break;
     case 4:
+       lastMelody();
        fillScreen();
        break;
     default:
