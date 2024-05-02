@@ -37,13 +37,13 @@ void melody(int counter) {
 }
 
 void bachPartita(int counter) {
-    drawTree();
+    drawPiano();
     // Theme from Bach Chaconne in D Minor
     int notes[] = {294, 349, 349, 392, 349, 330, 349, 392, 0, 440, 466, 523, 587, 698, 659, 0, 659, 440, 0, 440};
     int numNotes = sizeof(notes) / sizeof(notes[0]); // Array size
 
     playNotes(notes, numNotes);
     if (counter == 2) return;
-    drawTree();
+    drawPiano();
     bachPartita(counter + 1);
 }

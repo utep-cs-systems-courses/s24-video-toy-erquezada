@@ -11,12 +11,11 @@ void state_advance(int state){
       clearScreen(COLOR_BLACK);
       break;
     case 2:
-       drawTree();
-       drawStonehenge();
+       drawPiano();
        break;
     case 3:
       bachPartita(1);
-      drawBox();
+      drawStonehenge();
       break;
     case 4:
        fillScreen();

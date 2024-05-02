@@ -3,7 +3,7 @@
 #include <lcdutils.h>
 
 void fillTriangle();
-void drawTree();
+void drawPiano();;
 void drawBox(u_char acol, u_char arow, u_char size, u_int color);
 int globalCounter();
 void mainScreen();

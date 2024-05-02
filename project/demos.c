@@ -27,17 +27,27 @@ void drawBox(u_char acol, u_char arow, u_char size, u_int color) {
   }
 }
 
-void drawTree() {
-    int change = globalCounter();
-    // Draw the trunk
-    fillRectangle(250, 100, 20, 80, COLOR_BROWN);
+void drawPiano() {
+    int keyWidth = 20;
+    int keyHeight = 100;
+    int gap = 5; // Gap between keys
+    int startX = 50; // Starting X position for drawing keys
+    int startY = 100; // Starting Y position for drawing keys
     
-    // Draw the leaves
-    fillRectangle(230, 50, 40, 40, COLOR_GREEN);
-    fillRectangle(250, 40, 40, 40, COLOR_GREEN);
-    fillRectangle(270, 50, 40, 40, COLOR_GREEN);
-    fillRectangle(240, 80, 40, 40, COLOR_GREEN);
-    fillRectangle(260, 80, 40, 40, COLOR_GREEN);
+    // Draw the black keys
+    fillRectangle(startX + keyWidth, startY, keyWidth - gap, keyHeight / 2, COLOR_BLACK);
+    fillRectangle(startX + 3 * keyWidth, startY, keyWidth - gap, keyHeight / 2, COLOR_BLACK);
+    fillRectangle(startX + 5 * keyWidth, startY, keyWidth - gap, keyHeight / 2, COLOR_BLACK);
+    fillRectangle(startX + 7 * keyWidth, startY, keyWidth - gap, keyHeight / 2, COLOR_BLACK);
+    fillRectangle(startX + 9 * keyWidth, startY, keyWidth - gap, keyHeight / 2, COLOR_BLACK);
+    
+    // Draw the white keys
+    fillRectangle(startX, startY, keyWidth, keyHeight, COLOR_WHITE);
+    fillRectangle(startX + 2 * keyWidth, startY, keyWidth, keyHeight, COLOR_WHITE);
+    fillRectangle(startX + 4 * keyWidth, startY, keyWidth, keyHeight, COLOR_WHITE);
+    fillRectangle(startX + 6 * keyWidth, startY, keyWidth, keyHeight, COLOR_WHITE);
+    fillRectangle(startX + 8 * keyWidth, startY, keyWidth, keyHeight, COLOR_WHITE);
+    fillRectangle(startX + 10 * keyWidth, startY, keyWidth, keyHeight, COLOR_WHITE);
 }
 
 
