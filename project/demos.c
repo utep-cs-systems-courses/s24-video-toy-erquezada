@@ -9,12 +9,39 @@
 #include "buzzer.h"
 #include "stateMachine.h"
 
-void fillTriangle() {
-  for (int i = 0; i < 64; i++) {
-    for (int j = 0; j < i; j++) {
-      drawPixel(j, i, COLOR_BLUE);
+
+void animateTriangles() {
+    clearScreen(COLOR_SKY_BLUE);
+    int triangleHeight = 20; // Height of each triangle
+    int startX = 50; // Starting X position for drawing triangles
+    int startY = 50; // Starting Y position for drawing triangles
+    int counter = 0; // Counter to limit the number of iterations
+
+    while (counter < 100) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j <= i; j++) {
+                for (int k = 0; k < triangleHeight; k++) {
+                    drawPixel(startX + k + i * (triangleHeight + 1), startY + j * (triangleHeight + 1) + k, rand() % (COLOR_BLUE + 1));
+                }
+            }
+        }
+        __delay_cycles(500000); // Adjust delay as needed for desired animation speed
+        
+        int x = rand() % 10000;
+        int y = rand() % 10000;
+        int width = rand() % 20 + 5; // Random width between 5 and 25 pixels
+        int height = rand() % 20 + 5; // Random height between 5 and 25 pixels
+        int color = rand() % (COLOR_BLUE + 1); // Ensure random color falls within the valid range
+        
+        // Draw random filled triangle
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                drawPixel(x + i, y + j, color);
+            }
+        }
+        
+        counter++; // Increment the counter
     }
-  }
 }
 
 void drawAnimatedSquares() {

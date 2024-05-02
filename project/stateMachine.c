@@ -6,8 +6,8 @@
 void state_advance(int state){ 
  switch (state) {
     case 1:
-      fillTriangle();
-      clearScreen(COLOR_BLACK);
+      anotherMelody();
+      animateTriangles();
       break;
     case 2:
        melody(1);

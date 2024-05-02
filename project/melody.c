@@ -63,3 +63,21 @@ void bachPartita(int counter) {
     drawSquares(); // Draw the piano after playing the melody
 }
 
+void anotherMelody(int counter) {
+    if (counter == 2) return; // Terminate recursion based on the desired condition
+    
+    drawCircles();
+    
+    // Melody
+    int notes[] = {523, 587, 659, 698, 784, 880, 988, 1046, 1174, 1318, 1396, 1568, 1760, 1976, 2093, 0, 2093, 1976, 1760, 1568};
+
+    int numNotes = sizeof(notes) / sizeof(notes[0]); // Array size
+
+    playNotes(notes, numNotes); // Play the melody
+    
+    anotherMelody(counter + 1); // Recursive call with counter incremented
+    
+    drawCircles(); // Draw circles after playing the melody
+}
+
+
