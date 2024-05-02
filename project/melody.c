@@ -4,6 +4,7 @@
 #include "led.h"
 #include "demos.h"
 #include "switches.h"
+#include "notes.h"
 
 void playNotes(int notes[], int numNotes) {
     for (int i = 0; i < numNotes; i++) {
@@ -66,7 +67,7 @@ void bachPartita(int counter) {
 void anotherMelody(int counter) {
     if (counter == 2) return; // Terminate recursion based on the desired condition
     
-    drawCircles();
+    animateTriangles();
     
     // Melody
     int notes[] = {523, 587, 659, 698, 784, 880, 988, 1046, 1174, 1318, 1396, 1568, 1760, 1976, 2093, 0, 2093, 1976, 1760, 1568};
@@ -77,7 +78,7 @@ void anotherMelody(int counter) {
     
     anotherMelody(counter + 1); // Recursive call with counter incremented
     
-    drawCircles(); // Draw circles after playing the melody
+    animateTriangles(); // Draw circles after playing the melody
 }
 
 
