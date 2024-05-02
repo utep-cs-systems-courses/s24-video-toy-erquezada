@@ -26,24 +26,38 @@ void playNotes(int notes[], int numNotes) {
     P1OUT |= (LED_RED | LED_GREEN);
 }
 
-void melody(int counter) {
-    // Bach Melody
-    int notes[] = {392, 0, 392, 0, 784, 740, 659, 587, 523, 659, 392, 0, 392, 0, 587, 523, 494, 440, 392, 0, 587};
+    void melody(int counter) {
+    // Bach Melody with notes an octave higher
+    int notes[] = {784, 0, 784, 0, 1568, 1480, 1319, 1175, 1047, 1319, 784, 0, 784, 0, 1175, 1047, 988, 880, 784, 0, 1175};
     int numNotes = sizeof(notes) / sizeof(notes[0]);
     playNotes(notes, numNotes);
-    if (counter == 2) return;
+    
+    if (counter >= 2) {
+        // Terminate recursion when counter reaches 2 or more
+        return;
+    }
+    
+    // Initialization step outside of recursion
     switch_init();
+    
+    // Recursive call with counter incremented
     melody(counter + 1);
 }
 
 void bachPartita(int counter) {
-    drawPiano();
+    if (counter == 2) return; // Terminate recursion based on the desired condition
+    
+    drawSquares(); // Draw the piano before playing the melody
+    
     // Theme from Bach Chaconne in D Minor
-    int notes[] = {294, 349, 349, 392, 349, 330, 349, 392, 0, 440, 466, 523, 587, 698, 659, 0, 659, 440, 0, 440};
+    int notes[] = {588, 698, 698, 784, 698, 660, 698, 784, 0, 880, 932, 1046, 1174, 1396, 1318, 0, 1318, 880, 0, 880};
+
     int numNotes = sizeof(notes) / sizeof(notes[0]); // Array size
 
-    playNotes(notes, numNotes);
-    if (counter == 2) return;
-    drawPiano();
-    bachPartita(counter + 1);
+    playNotes(notes, numNotes); // Play the melody
+    
+    bachPartita(counter + 1); // Recursive call with counter incremented
+    
+    drawSquares(); // Draw the piano after playing the melody
 }
+

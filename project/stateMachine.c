@@ -7,11 +7,11 @@ void state_advance(int state){
  switch (state) {
     case 1:
       fillTriangle();
-      melody(2);
       clearScreen(COLOR_BLACK);
       break;
     case 2:
-       drawPiano();
+       melody(2);
+       drawSquares();
        break;
     case 3:
       bachPartita(1);
