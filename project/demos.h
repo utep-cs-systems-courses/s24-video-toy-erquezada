@@ -4,9 +4,11 @@
 
 void fillTriangle();
 void drawSquares();;
-void drawBox(u_char acol, u_char arow, u_char size, u_int color);
+void drawAnimatedSquares();
 int globalCounter();
-void mainScreen();
-void drawStonehenge();
+void fillScreen();
+
+
+
 
 #endif

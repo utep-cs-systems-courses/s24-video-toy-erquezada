@@ -10,19 +10,17 @@ void state_advance(int state){
       clearScreen(COLOR_BLACK);
       break;
     case 2:
-       melody(2);
-       drawSquares();
+       melody(1);
+       drawAnimatedSquares();
        break;
     case 3:
       bachPartita(1);
-      drawStonehenge();
+      drawSquares();
       break;
     case 4:
        fillScreen();
        break;
-      
     default:
-      
       break;
   }
 }
