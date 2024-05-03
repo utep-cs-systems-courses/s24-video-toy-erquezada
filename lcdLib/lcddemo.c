@@ -5,15 +5,12 @@
 #include "stateMachine.h"
 
 
-
-u_char screenWidth, screenHeight;
-
 /* Function prototypes */
 void state_advance(int state);
 void drawLine();
 void drawLine2();
 void fillTriangle();
-void drawHourGlass();
+void drawBox();
 static char switch_update_interrupt_sense();
 void switch_init();
 void switch_interrupt_handler();
@@ -21,6 +18,7 @@ void switch_interrupt_handler();
 /* Main function */
 void main() {
   configureClocks();
+  u_char screenWidth, screenHeight;
   screenWidth = screenWidth;
   screenHeight = screenHeight;
   lcd_init();
@@ -54,7 +52,7 @@ void state_advance(int state) {
       fillTriangle();
       break;
     case 4: 
-      drawHourGlass();
+      drawBox();
       break;
     default:
       break;
@@ -62,19 +60,22 @@ void state_advance(int state) {
 }
 
 /* Function to draw a diagonal line */
-void drawLine() {
+void drawLine() 
+{
   for (int i = 0; i < 128; i++)
     drawPixel(i, i, COLOR_BLUE);
 }
 
 /* Function to draw a second diagonal line */
-void drawLine2() {
+void drawLine2() 
+{
   for (int i = 0; i < 30; i++)
     drawPixel(i, 30 - i, COLOR_PINK);
 }
 
 /* Function to fill a triangle */
-void fillTriangle() {
+void fillTriangle() 
+{
   for (int i = 0; i < 64; i++) {
     for (int j = 0; j < i; j++) {
       drawPixel(j, i, COLOR_BEIGE);
@@ -82,24 +83,13 @@ void fillTriangle() {
   }
 }
 
-/* Function to draw the initial display */
-void drawHourGlass() {
-  // Drawing initial text
-  drawString5x7(20, 20, "Testing function", COLOR_GREEN, COLOR_RED);
-
-  // Drawing a pattern
-  u_char width = screenWidth;
-  u_char height = screenHeight;
-  short centerCol = width / 2;
-  short centerRow = height / 2;
-  for (int col = 0; col < 20; col++) {
-    for (int row = 0; row < 20; row++) {
-      drawPixel(centerCol + col, centerRow + row, COLOR_PINK);
-      drawPixel(centerCol + col, centerRow - row, COLOR_PINK);
-      drawPixel(centerCol - col, centerRow - row, COLOR_PINK);
-      drawPixel(centerCol - col, centerRow + row, COLOR_PINK);
-    }
-  }
+void drawBox(u_char acol, u_char arow, u_char size, u_char color)
+{
+  uc max_col = acol + size;
+  uc max_row = acol + row;
+  for (uc col = acol - size; col < max_col; col++)
+    for (uc row = arow - size; col < max_row; row++)
+      drawPixel(col, row, color)
 }
 
 /* Function to initialize switches */
