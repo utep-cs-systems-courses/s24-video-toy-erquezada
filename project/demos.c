@@ -15,32 +15,29 @@ void animateTriangles() {
     int triangleHeight = 20; // Height of each triangle
     int startX = 50; // Starting X position for drawing triangles
     int startY = 50; // Starting Y position for drawing triangles
-    int counter = 0; // Counter to limit the number of iterations
-
-    while (counter < 100) {
+    
+    for (int counter = 0; counter < 100; counter++) {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j <= i; j++) {
                 for (int k = 0; k < triangleHeight; k++) {
-                    drawPixel(startX + k + i * (triangleHeight + 1), startY + j * (triangleHeight + 1) + k, rand() % (COLOR_BLUE + 1));
+                    drawPixel(startX + k + i * (triangleHeight + 1), startY + j * (triangleHeight + 1) + k, counter % (COLOR_BLUE + 1));
                 }
             }
         }
         __delay_cycles(500000); // Adjust delay as needed for desired animation speed
         
-        int x = rand() % 10000;
-        int y = rand() % 10000;
-        int width = rand() % 20 + 5; // Random width between 5 and 25 pixels
-        int height = rand() % 20 + 5; // Random height between 5 and 25 pixels
-        int color = rand() % (COLOR_BLUE + 1); // Ensure random color falls within the valid range
+        int x = counter % 10000;
+        int y = counter % 10000;
+        int width = (counter % 20) + 5; // width between 5 and 25 pixels
+        int height = (counter % 20) + 5; // height between 5 and 25 pixels
+        int color = counter % (COLOR_BLUE + 1); // Ensure colors falls within the valid range
         
-        // Draw random filled triangle
+        // Draw filled triangle
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 drawPixel(x + i, y + j, color);
             }
         }
-        
-        counter++; // Increment the counter
     }
 }
 
@@ -50,9 +47,8 @@ void drawAnimatedSquares() {
     int gap = 5; // Gap between squares
     int startX = 50; // Starting X position for drawing squares
     int startY = 50; // Starting Y position for drawing squares
-    int counter = 0; // Counter to limit the number of iterations
 
-    while (counter < 100) {
+    for (int counter = 0; counter < 100; counter++) {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 if ((i + j + counter) % 2 == 0) {
@@ -64,19 +60,16 @@ void drawAnimatedSquares() {
         }
         __delay_cycles(500000); // Adjust delay as needed for desired animation speed
         
-        int x = rand() % 10000;
-        int y = rand() % 10000;
-        int width = rand() % 20 + 5; // Random width between 5 and 25 pixels
-        int height = rand() % 20 + 5; // Random height between 5 and 25 pixels
-        int color = rand() % (COLOR_BLUE + 1); // Ensure random color falls within the valid range
+        int x = counter % 10000;
+        int y = counter % 10000;
+        int width = (counter % 20) + 5; // width between 5 and 25 pixels
+        int height = (counter % 20) + 5; // height between 5 and 25 pixels
+        int color = counter % (COLOR_BLUE + 1); // Ensure color falls within the valid range
         
-        // Draw random filled rectangle
+        // Draw filled rectangle
         fillRectangle(x, y, width, height, color);
-        
-        counter++; // Increment the counter
     }
 }
-
 
 void drawSquares() {
     clearScreen(COLOR_GRAY);
@@ -98,21 +91,16 @@ void drawSquares() {
 
 void fillScreen() {
     __delay_cycles(10000);
-    int counter = 0; // Counter to limit the number of iterations
-    while (counter < 200) { // Terminate after 100 iterations
-        int x = rand() % 10000;
-        int y = rand() % 10000;
-        int width = rand() % 20 + 5; // Random width between 5 and 25 pixels
-        int height = rand() % 20 + 5; // Random height between 5 and 25 pixels
-        int color = rand() % (COLOR_BLUE + 1); // Ensure random color falls within the valid range
+    for (int counter = 0; counter < 200; counter++) {
+        int x = counter % 10000;
+        int y = counter % 10000;
+        int width = (counter % 20) + 5; // width between 5 and 25 pixels
+        int height = (counter % 20) + 5; // height between 5 and 25 pixels
+        int color = counter % (COLOR_BLUE + 1); // Ensure color falls within the valid range
         
         // Draw random filled rectangle
         fillRectangle(x, y, width, height, color);
         
         __delay_cycles(500000); // Adjust delay as needed for desired animation speed
-        counter++; // Increment the counter
     }
 }
-
-
-

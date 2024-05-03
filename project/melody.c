@@ -4,7 +4,7 @@
 #include "led.h"
 #include "demos.h"
 #include "switches.h"
-#include "notes.h"
+
 
 void playNotes(int notes[], int numNotes) {
     for (int i = 0; i < numNotes; i++) {
