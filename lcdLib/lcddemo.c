@@ -83,14 +83,15 @@ void fillTriangle()
   }
 }
 
-void drawBox(u_char acol, u_char arow, u_char size, u_char color)
-{
-  uc max_col = acol + size;
-  uc max_row = acol + row;
-  for (uc col = acol - size; col < max_col; col++)
-    for (uc row = arow - size; col < max_row; row++)
-      drawPixel(col, row, color)
+void drawBox() {
+    unsigned char acol = 10, arow = 20, size = 5, color = COLOR_YELLOW; // Assigning example values
+    unsigned char max_col = acol + size;
+    unsigned char max_row = arow + size;
+    for (unsigned char col = acol - size; col < max_col; col++)
+        for (unsigned char row = arow - size; row < max_row; row++)
+            drawPixel(col, row, color);
 }
+
 
 /* Function to initialize switches */
 void switch_init() {
