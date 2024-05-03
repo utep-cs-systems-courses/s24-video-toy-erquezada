@@ -30,15 +30,15 @@ switch_interrupt_handler()
 {
     char p2val = switch_update_interrupt_sense();
     if(p2val & SW1 ? 0 : 1){
-      state_advance(1);
+      stateMachine();
     }
     else if(p2val & SW2 ? 0 : 1){
-      state_advance(2);
+      stateMachine();
     }
     else if(p2val & SW3 ? 0 : 1){
-      state_advance(3);
+      stateMachine();
     }
     else if(p2val & SW4 ? 0 : 1){
-      state_advance(4);
+      stateMachine();
     }
 }

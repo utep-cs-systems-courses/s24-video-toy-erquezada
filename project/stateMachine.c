@@ -18,20 +18,28 @@ void stateMachine() {
 
     switch (buttonPressed) {
         case 1: // Button 1: Play a melody
-              anotherMelody();
-              animateTriangles();
+            anotherMelody();
+            animateTriangles();
+            buzzer_set_period(0);
+            P1OUT &= ~LEDS;
             break;
         case 2: // Button 2: Trigger a random sound
             melody(1);
             drawAnimatedSquares();
+            buzzer_set_period(0);
+            P1OUT |= LEDS;
             break;
         case 3: // Button 3: Activate an alarm sound
             bachPartita(1);
             drawSquares();
+            buzzer_set_period(0);
+            P1OUT &= LEDS;
             break;
         case 4: // Button 4: Play a c major scale
             lastMelody();
             fillScreen();
+            buzzer_set_period(0);
+            P1OUT |= ~LEDS;
             break;
         default: // No button pressed
         // Reset buzzer and LEDs by default
