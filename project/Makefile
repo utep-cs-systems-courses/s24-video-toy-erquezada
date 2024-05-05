@@ -1,4 +1,4 @@
-COMMON_OBJECTS		= demos.o p2_interrupt_handler.o stateMachine.o switches.o buzzer.o melody.o switches.c.o
+COMMON_OBJECTS		= demos.o p2_interrupt_handler.o stateMachine.o switches.o buzzer.o melody.o p2_interrupt_handler.c.o
 
 CPU             	= msp430g2553
 CFLAGS          	= -mmcu=${CPU} -Os -I../h
